@@ -1,0 +1,35 @@
+{
+  "name": "@rnts/app",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf ./lib ./dist",
+    "build": "rimraf ./lib && yarn run tsc",
+    "bundle": "yarn run bundle:ios && yarn run bundle:android && yarn run bundle:macos && yarn run bundle:win32 && yarn run bundle:windows",
+    "bundle:ios": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform ios --dev true --bundle-output ./dist/app.ios.jsbundle --sourcemap-output ./dist/app.ios.map && node check-bundle.js ./dist/app.ios.jsbundle ios",
+    "bundle:android": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform android --dev true --bundle-output ./dist/app.android.jsbundle --sourcemap-output ./dist/app.android.map && node check-bundle.js ./dist/app.android.jsbundle native",
+    "bundle:macos": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform macos --dev true --bundle-output ./dist/app.macos.jsbundle --sourcemap-output ./dist/app.macos.map && node check-bundle.js ./dist/app.macos.jsbundle native",
+    "bundle:win32": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform win32 --dev true --bundle-output ./dist/app.win32.jsbundle --sourcemap-output ./dist/app.win32.map && node check-bundle.js ./dist/app.win32.jsbundle win32",
+    "bundle:windows": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform windows --dev true --bundle-output ./dist/app.windows.jsbundle --sourcemap-output ./dist/app.windows.map && node check-bundle.js ./dist/app.windows.jsbundle windows"
+  },
+  "dependencies": {
+    "@office-iss/react-native-win32": "^0.66.0",
+    "@rnts/button": "*",
+    "react": "17.0.2",
+    "react-native": "^0.66.0",
+    "react-native-macos": "^0.66.0",
+    "react-native-windows": "^0.66.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@react-native-community/cli": "^6.0.0",
+    "@rnx-kit/babel-preset-metro-react-native": "^1.0.17",
+    "@rnx-kit/metro-config": "^1.2.27",
+    "@types/react-native": "^0.66.0",
+    "make-dir-cli": "^3.0.0",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.5"
+  }
+}

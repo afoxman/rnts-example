@@ -1,0 +1,39 @@
+{
+  "name": "rnts-example",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "author": "Adam Foxman <afoxman@microsoft.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afoxman/rnts-example.git"
+  },
+  "scripts": {
+    "build": "lage build --verbose",
+    "bundle": "lage bundle --verbose",
+    "clean": "lage cache --clear && lage clean --verbose"
+  },
+  "devDependencies": {
+    "lage": "~1.1.0",
+    "prettier": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "resolutions": {
+    "micromatch": "^4.0.0"
+  },
+  "lage": {
+    "npmClient": "yarn",
+    "pipeline": {
+      "build": [
+        "^build"
+      ]
+    }
+  }
+}
