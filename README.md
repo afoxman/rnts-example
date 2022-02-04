@@ -78,13 +78,13 @@ IntelliSense will need additional support to make this work. With multiple tscon
 Alternatively, the collection of *all* module file extension sets could be stored in a
 single tsconfig file:
 
-```json
+```jsonc
 {
   "compilerOptions": {
     "moduleFileExtensionProfiles": {
       "ios": ["ios", "mobile", "native", ""],
       "win32": ["win32", "win", "native", ""],
-      ...
+      // ...
     }
   }
 }
@@ -104,7 +104,7 @@ Each platform package is a complete implementation of react-native, and has (or 
 
 To avoid having "forked" references to the various NPM package names in code, the react-native bundler maps imports of `react-native` to the target out-of-tree platform package. For Windows, `import 'react-native'` becomes `import 'react-native-windows'`.
 
-TypeScript should support a similar mechanism, but only for type-checking and IntelliSense. Emitted code should not show the substituted module name.
+TypeScript should support a similar mechanism, but only for type-checking and IntelliSense. Emitted code should preserve the original imported module name.
 
 ```jsonc
 // Per-Platform TSConfig
@@ -134,7 +134,5 @@ TypeScript should support a similar mechanism, but only for type-checking and In
   }
 }
 ```
-
-I The emitted JavaScript and declaration files should retain the original import statement. contain the mapped package name (`react-native-windows`, not `react-native`). This is necessary because the mapping context -- in tsconfig -- is gone, and the files must be valid as standalone blocks of code. Downstream consumers can then 
 
 You can see an example of this in [button.win32.tsx](./packages/button/src/button.win32.tsx) where the Win32-specific types `ViewWin32` and `TextWin32` are imported.
