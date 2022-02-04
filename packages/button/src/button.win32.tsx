@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ViewWin32, TextWin32, GestureResponderEvent } from 'react-native'; // should use types from @office-iss/react-native-win32
+import { GestureResponderEvent } from 'react-native';
+import { ViewWin32, TextWin32 } from '@office-iss/react-native-win32';
 
 export interface WindowsClickEvent extends GestureResponderEvent {
   clickSource: "leftMouseButton" | "rightMouseButton" | "middleMouseButton" | "spaceBar" | "returnKey";

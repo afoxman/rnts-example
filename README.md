@@ -102,9 +102,9 @@ React-native is implemented on many platforms which span several NPM packages. `
 
 Each platform package is a complete implementation of react-native, and has (or should have) associated TypeScript types.
 
-To avoid having "forked" references to the various NPM package names in code, the react-native bundler maps imports of `react-native` to the target out-of-tree platform package. For Windows, `import 'react-native'` becomes `import 'react-native-windows'`.
+To avoid having "forked" references to the various NPM package names in code, the react-native bundler maps imports of `react-native` to the target out-of-tree platform package. For MacOS, `import 'react-native'` becomes `import 'react-native-macos'`.
 
-TypeScript should support a similar mechanism, but only for type-checking and IntelliSense. Emitted code should preserve the original imported module name.
+TypeScript should support a similar mechanism, but only for type-checking and IntelliSense. Emitted code should preserve the original module import.
 
 ```jsonc
 // Per-Platform TSConfig
@@ -135,4 +135,4 @@ TypeScript should support a similar mechanism, but only for type-checking and In
 }
 ```
 
-You can see an example of this in [button.win32.tsx](./packages/button/src/button.win32.tsx) where the Win32-specific types `ViewWin32` and `TextWin32` are imported.
+You can see an example of this in [button.native.tsx](./packages/button/src/button.win32.tsx). This file is used for both Android (in-tree platform) and MacOS (out-of-tree platform).

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button as RNButton, GestureResponderEvent } from 'react-native';
+import { Button as RNButton, GestureResponderEvent } from 'react-native'; // maps to `react-native` for Android and `react-native-macos` for MacOS
 
 export interface IButtonProps {
   label: string;
