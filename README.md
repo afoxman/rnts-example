@@ -6,9 +6,7 @@ The `Button` package is a react-native-only control, and it is specialized per-p
 
 The intent is to provide a playground for developing solutions to these problems.
 
-The repo is currently "broken", meaning it can't run TypeScript builds or provide full IntelliSense. Once the problems are fixed, everything should work.
-
-The repo can, however, be bundled into a react-native app. This is because the bundler has extra logic which TypeScript does not.
+The repo is currently "broken", meaning it can't build, bundle or provide full IntelliSense. Once the problems are fixed, everything should work.
 
 Interesting commands (from the repo root):
 
@@ -17,13 +15,11 @@ yarn run build
 yarn run bundle
 ```
 
-To see IntelliSense failures, open this repo in VS Code.
-
 ## React-Native Platform Extensions
 
 Docs: https://reactnative.dev/docs/platform-specific-code#platform-specific-extensions
 
-In react-native, when building or bundling TS code, or when running IntelliSense, TypeScript
+In react-native, when building or validating TS code, or when running IntelliSense, TypeScript
 should know how to resolve modules for the target platform (`ios`, `android`, `macos`, `win32`, and `windows`).
 
 For example, when resolving module 'button' for platform `ios`, the TS resolver should look for
@@ -34,7 +30,9 @@ inside will be suitable for any react-native platform. This is useful for projec
 that are a mix of react-native and web code. Web code lives in files without a platform
 extension: `button.ts[x]?`. Those projects would always have a corresponding "native" file.
 
-You can see an example of this in the button [index.ts](./packages/button/src/index.ts) file.
+You can see an example of this in the button [index.ts](./packages/button/src/index.ts) file:
+
+![IntelliSense Error](intellisense-error.png)
 
 ### Defaults and Overrides
 
@@ -48,7 +46,7 @@ React-native apps are built using *native* as the only fallback:
 | win32 | native |
 | windows | native |
 
-App developers can change this, as needed. For example, the 1JS/Midgard repo adds a 'win' fallback and a 'mobile' fallback:
+App developers can change this, as needed. For example, this repo adds a 'win' fallback and a 'mobile' fallback:
 
 | Platform | Fallback extensions (ordered) |
 |---|---|
@@ -57,6 +55,8 @@ App developers can change this, as needed. For example, the 1JS/Midgard repo add
 | macos | native |
 | win32 | **win**, native |
 | windows | **win**, native |
+
+You can see these fallbacks defined in the Haul bundler configuration file [haul.config.js](./packages/app/haul.config.js). They'd simiarly need to be defined in the TypeScript configuration file to make build and type-validation work in an equivalent manner.
 
 ### Solutions
 
@@ -105,7 +105,7 @@ single tsconfig file:
 }
 ```
 
-This is less desirable because the target set must be specified with each run of TypeScript. Each 3rd party package that uses TypeScript's API (e.g. webpack plugins, api extractor) would need to expose a way to choose the target set to make this feature usable.
+This is less desirable because the target set must be specified with each run of TypeScript. 3rd party packages that use TypeScript's API (e.g. webpack ts-loader plugin, api extractor) would need to expose a way to choose the target set to make this feature usable.
 
 And, like the *Per-Platform TSConfig* solution, IntelliSense will need to be told which target set to use.
 
@@ -115,7 +115,7 @@ React-native is implemented on many platforms which span several packages. `ios`
 
 To avoid having "forked" references to react-native package names in code, developers require/import `react-native` and the bundler substitutes `react-native` with the platform-specific package name. So, `import 'react-native'` is interpreted as `import 'react-native-windows'` for a Windows bundle.
 
-TypeScript should support a similar mechanism in which one module reference is substituted with another. This makes it possible to have type-safety during builds and in IntelliSense sessions:
+TypeScript should support a similar mechanism in which one module reference is substituted with another. This makes it possible to have type-safety during builds and bundling, and in IntelliSense sessions:
 
 ```json
 // Per-Platform TSConfig
@@ -145,4 +145,4 @@ TypeScript should support a similar mechanism in which one module reference is s
 }
 ```
 
-You can see an example of this in [button.win32.tsx](./packages/button/src/button.win32.tsx).
+You can see an example of this in [button.win32.tsx](./packages/button/src/button.win32.tsx) where the Win32-specific types `ViewWin32` and `TextWin32` are imported.

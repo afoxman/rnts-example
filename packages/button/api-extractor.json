@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+
+  "projectFolder": ".",
+  "mainEntryPointFilePath": "<projectFolder>/lib/index.d.ts",
+
+  "bundledPackages": ["react-native", "react-native-windows", "react-native-macos", "@office-iss/react-native-win32"],
+
+  "compiler": {
+    "tsconfigFilePath": "<projectFolder>/tsconfig.json",
+  },
+
+  "apiReport": {
+    "enabled": true,
+    "reportFileName": "<unscopedPackageName>.api.md",
+    "reportFolder": "<projectFolder>/lib/",
+    "reportTempFolder": "<projectFolder>/lib/temp/"
+  },
+
+  "docModel": {
+    "enabled": true,
+    "apiJsonFilePath": "<projectFolder>/lib/<unscopedPackageName>.api.json"
+  },
+
+  "dtsRollup": {
+    "enabled": true,
+    "untrimmedFilePath": "<projectFolder>/dist/<unscopedPackageName>.d.ts"
+  },
+
+  "tsdocMetadata": {
+    "enabled": true,
+    "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"
+  },
+
+  "newlineKind": "lf",
+
+  "messages": {
+    "compilerMessageReporting": {
+      "default": {
+        "logLevel": "warning"
+      }
+    },
+
+    "extractorMessageReporting": {
+      "default": {
+        "logLevel": "warning"
+      }
+    },
+
+    "tsdocMessageReporting": {
+      "default": {
+        "logLevel": "warning"
+      }
+    }
+  }
+}

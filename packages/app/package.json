@@ -7,11 +7,17 @@
     "clean": "rimraf ./lib ./dist",
     "build": "rimraf ./lib && yarn run tsc",
     "bundle": "yarn run bundle:ios && yarn run bundle:android && yarn run bundle:macos && yarn run bundle:win32 && yarn run bundle:windows",
-    "bundle:ios": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform ios --dev true --bundle-output ./dist/app.ios.jsbundle --sourcemap-output ./dist/app.ios.map && node check-bundle.js ./dist/app.ios.jsbundle ios",
-    "bundle:android": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform android --dev true --bundle-output ./dist/app.android.jsbundle --sourcemap-output ./dist/app.android.map && node check-bundle.js ./dist/app.android.jsbundle native",
-    "bundle:macos": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform macos --dev true --bundle-output ./dist/app.macos.jsbundle --sourcemap-output ./dist/app.macos.map && node check-bundle.js ./dist/app.macos.jsbundle native",
-    "bundle:win32": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform win32 --dev true --bundle-output ./dist/app.win32.jsbundle --sourcemap-output ./dist/app.win32.map && node check-bundle.js ./dist/app.win32.jsbundle win32",
-    "bundle:windows": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform windows --dev true --bundle-output ./dist/app.windows.jsbundle --sourcemap-output ./dist/app.windows.map && node check-bundle.js ./dist/app.windows.jsbundle windows"
+    "bundle:ios": "yarn run make-dir dist && yarn run haul bundle --entry-file ./index.js --assets-dest ./dist --platform ios --dev true --bundle-output ./dist/app.ios.jsbundle --sourcemap-output ./dist/app.ios.map && node check-bundle.js ./dist/app.ios.jsbundle ios",
+    "bundle:android": "yarn run make-dir dist && yarn run haul bundle --entry-file ./index.js --assets-dest ./dist --platform android --dev true --bundle-output ./dist/app.android.jsbundle --sourcemap-output ./dist/app.android.map && node check-bundle.js ./dist/app.android.jsbundle native",
+    "bundle:macos": "yarn run make-dir dist && yarn run haul bundle --entry-file ./index.js --assets-dest ./dist --platform macos --dev true --bundle-output ./dist/app.macos.jsbundle --sourcemap-output ./dist/app.macos.map && node check-bundle.js ./dist/app.macos.jsbundle native",
+    "bundle:win32": "yarn run make-dir dist && yarn run haul bundle --entry-file ./index.js --assets-dest ./dist --platform win32 --dev true --bundle-output ./dist/app.win32.jsbundle --sourcemap-output ./dist/app.win32.map && node check-bundle.js ./dist/app.win32.jsbundle win32",
+    "bundle:windows": "yarn run make-dir dist && yarn run haul bundle --entry-file ./index.js --assets-dest ./dist --platform windows --dev true --bundle-output ./dist/app.windows.jsbundle --sourcemap-output ./dist/app.windows.map && node check-bundle.js ./dist/app.windows.jsbundle windows",
+    "metro": "yarn run metro:ios && yarn run metro:android && yarn run metro:macos && yarn run metro:win32 && yarn run metro:windows",
+    "metro:ios": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform ios --dev true --bundle-output ./dist/app-metro.ios.jsbundle --sourcemap-output ./dist/app-metro.ios.map && node check-bundle.js ./dist/app-metro.ios.jsbundle ios",
+    "metro:android": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform android --dev true --bundle-output ./dist/app-metro.android.jsbundle --sourcemap-output ./dist/app-metro.android.map && node check-bundle.js ./dist/app-metro.android.jsbundle native",
+    "metro:macos": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform macos --dev true --bundle-output ./dist/app-metro.macos.jsbundle --sourcemap-output ./dist/app-metro.macos.map && node check-bundle.js ./dist/app-metro.macos.jsbundle native",
+    "metro:win32": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform win32 --dev true --bundle-output ./dist/app-metro.win32.jsbundle --sourcemap-output ./dist/app-metro.win32.map && node check-bundle.js ./dist/app-metro.win32.jsbundle win32",
+    "metro:windows": "yarn run make-dir dist && react-native bundle --entry-file ./index.js --platform windows --dev true --bundle-output ./dist/app-metro.windows.jsbundle --sourcemap-output ./dist/app-metro.windows.map && node check-bundle.js ./dist/app-metro.windows.jsbundle windows"
   },
   "dependencies": {
     "@office-iss/react-native-win32": "^0.66.0",
@@ -23,6 +29,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@haul-bundler/cli": "^0.23.0",
+    "@haul-bundler/core": "^0.23.0",
+    "@haul-bundler/preset-0.59": "^0.18.1",
     "@react-native-community/cli": "^6.0.0",
     "@rnx-kit/babel-preset-metro-react-native": "^1.0.17",
     "@rnx-kit/metro-config": "^1.2.27",
@@ -30,6 +39,7 @@
     "make-dir-cli": "^3.0.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "rimraf": "^3.0.2",
+    "ts-loader": "^7.0.5",
     "typescript": "^4.5.5"
   }
 }
