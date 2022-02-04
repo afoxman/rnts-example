@@ -111,8 +111,8 @@ TypeScript should support a similar mechanism, but only for type-checking and In
 {
   "compilerOptions": {
     "typeModuleMap": {
-      // this implies @types/react-native-windows, if needed
-      "react-native": "react-native-windows"
+      // this implies @types/react-native-macos, if needed
+      "react-native": "react-native-macos"
     }
   }
 }
@@ -121,14 +121,14 @@ TypeScript should support a similar mechanism, but only for type-checking and In
 {
   "compilerOptions": {
     "typeModuleMapProfiles": {
+      "macos": {
+        "react-native": "react-native-macos"
+      },
       "windows": {
         "react-native": "react-native-windows"
       },
       "win32": {
         "react-native": "@office-iss/react-native-win32"
-      },
-      "macos": {
-        "react-native": "react-native-macos"
       }
     }
   }
